@@ -1,4 +1,15 @@
-services:docker
-language: javascript
-- docker-compose up
-- node query.js
+language: node_js
+node_js:
+  - 'node'
+services:
+  - docker
+
+before_install:
+- node --version
+- npm install
+- docker pull postgres
+- docker-compose up -d
+- docker ps -a
+
+script:
+- npm test
